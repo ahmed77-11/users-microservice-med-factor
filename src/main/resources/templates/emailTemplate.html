@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenue - Med Factor</title>
+</head>
+<body style="margin: 0; padding: 0; background-color: #f4f4f4; font-family: Arial, sans-serif;">
+
+<!-- Main Container -->
+<table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color: #f4f4f4; padding: 20px;">
+    <tr>
+        <td align="center">
+            <table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0" style="background: white; padding: 30px; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);">
+
+                <!-- Logo Section -->
+                <tr>
+                    <td align="center" style="padding-bottom: 20px;">
+                        <img th:src="'cid:logoImage'" alt="Med Factor Logo" width="100" style="display: block;">
+                    </td>
+                </tr>
+
+                <!-- Welcome Message -->
+                <tr>
+                    <td align="center" style="font-size: 24px; font-weight: bold; color: #2c3e50; padding-bottom: 10px;">
+                        Bienvenue dans Med Factor !
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center" style="font-size: 16px; color: #333; padding-bottom: 20px;">
+                        Voici vos informations de connexion :
+                    </td>
+                </tr>
+
+                <!-- Email & Password Section -->
+                <tr>
+                    <td align="center" style="background: #ecf0f1; padding: 20px; border-radius: 5px; font-size: 16px; color: #333;">
+                        <p>Email :
+                            <a th:href="'mailto:' + ${email}" th:text="${email}" style="color: #2980b9; text-decoration: none; font-weight: bold;">
+                                email@medfactor.com
+                            </a>
+                        </p>
+                        <p>Mot de passe :
+                            <span class="password" th:text="${password}" style="font-weight: bold; color: #e74c3c;">
+                                VotreMotDePasse
+                            </span>
+                        </p>
+                    </td>
+                </tr>
+
+                <!-- Footer -->
+                <tr>
+                    <td align="center" style="font-size: 14px; color: #777; padding-top: 20px;">
+                        <p>Si vous avez des questions, contactez notre support.</p>
+                        <p>&copy; 2024 Med Factor. Tous droits réservés.</p>
+                    </td>
+                </tr>
+
+            </table>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>
