@@ -13,6 +13,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/user")
@@ -30,6 +32,7 @@ public class UserController {
 
     @GetMapping("/{id}")
     public UserResponse getUserById(@PathVariable("id") Long id) {
+        System.out.println(new Date());
         System.out.println(id);
         if (id == null)
             return null;
@@ -68,6 +71,12 @@ public class UserController {
         user.setArchiver(true);
         return ResponseEntity.ok("User deleted successfully");
     }
+
+    @GetMapping("/usersByRole/{role}")
+    public List<UserResponse> getAllUserByRole(@PathVariable("role") String role){
+        return userService.getAllUserByRole(role);
+    }
+
 
 
 

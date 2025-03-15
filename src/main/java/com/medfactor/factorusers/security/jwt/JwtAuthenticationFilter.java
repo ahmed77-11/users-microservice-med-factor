@@ -1,5 +1,6 @@
 package com.medfactor.factorusers.security.jwt;
 
+import com.medfactor.factorusers.security.jwt.JwtUtils;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
@@ -35,10 +36,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     ) throws ServletException, IOException {
         try {
 
-            if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
-                filterChain.doFilter(request, response);
-                return;
-            }
 
 
 

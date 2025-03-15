@@ -1,10 +1,7 @@
 package com.medfactor.factorusers.controllers;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.medfactor.factorusers.dtos.LoginRequest;
-import com.medfactor.factorusers.dtos.LoginResponse;
-import com.medfactor.factorusers.dtos.ResetRequest;
-import com.medfactor.factorusers.dtos.VerifCodeRequest;
+import com.medfactor.factorusers.dtos.*;
 import com.medfactor.factorusers.service.UserService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
@@ -16,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.Principal;
 import java.util.Map;
 
 @RestController
@@ -75,6 +73,12 @@ public class AuthController {
     @PostMapping("/reset-password")
     public ResponseEntity<?> resetPassword(@RequestBody ResetRequest resetRequest) {
         userService.changePassword(resetRequest);
+        return ResponseEntity.ok("Password changed");
+    }
+    @PostMapping("/change-password-first-time")
+    public ResponseEntity<?> changePasswordFirstTime(@RequestBody ResetFirstTimeRequest resetRequest, Principal principal) {
+        resetRequest.setEmail(principal.getName());
+        userService.changePasswordFirstTime(resetRequest);
         return ResponseEntity.ok("Password changed");
     }
 }

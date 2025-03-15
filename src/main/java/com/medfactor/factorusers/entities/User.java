@@ -27,6 +27,9 @@ public class User {
     @Column(name = "archiver", nullable = true)
     private boolean archiver=false;
 
+    @Column(name = "force_change_password", nullable = true)
+    private boolean forceChangePassword=true;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name="user_role", joinColumns = @JoinColumn(name="user_id"), inverseJoinColumns = @JoinColumn(name="role_id"))
     private List<Role> roles;

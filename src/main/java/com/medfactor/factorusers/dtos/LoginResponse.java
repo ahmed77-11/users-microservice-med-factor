@@ -22,7 +22,8 @@ public class LoginResponse {
 //    private Collection<? extends GrantedAuthority> authorities;
     private List<String> roles;
     private String token;
-    public LoginResponse(String email,String cin,String firstName,String lastName,  Collection<? extends GrantedAuthority> authorities,String token){
+    private boolean forceChangePassword;
+    public LoginResponse(String email,String cin,String firstName,String lastName,  Collection<? extends GrantedAuthority> authorities,String token,boolean forceChangePassword){
         this.email=email;
         this.cin=cin;
         this.firstName=firstName;
@@ -31,6 +32,9 @@ public class LoginResponse {
                 .map(GrantedAuthority::getAuthority) // Extract authority name
                 .collect(Collectors.toList());
         this.token=token;
+        this.forceChangePassword = forceChangePassword;
+
+
     }
 
 }

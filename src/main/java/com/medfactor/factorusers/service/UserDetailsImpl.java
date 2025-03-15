@@ -25,10 +25,12 @@ public class UserDetailsImpl  implements UserDetails {
     private String cin;
     private String email;
     private String password;
+    private boolean forceChangePassword; // new field
+
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    private  UserDetailsImpl(Long id, String firstname,String lastname, String email,String cin, String password, Collection<? extends GrantedAuthority> authorities) {
+    private  UserDetailsImpl(Long id, String firstname,String lastname, String email,String cin, String password, Collection<? extends GrantedAuthority> authorities,boolean forceChangePassword) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -36,6 +38,8 @@ public class UserDetailsImpl  implements UserDetails {
         this.cin=cin;
         this.password = password;
         this.authorities = authorities;
+        this.forceChangePassword=forceChangePassword;
+
     }
     public static UserDetailsImpl build(User user) {
         // Convert roles to a collection of GrantedAuthority
@@ -44,14 +48,15 @@ public class UserDetailsImpl  implements UserDetails {
                 .collect(Collectors.toList());
 
         return new UserDetailsImpl(
-                user.getId(),
-                user.getFirstname(),
-                user.getLastname(),
-                user.getEmail(),
-                user.getCin(),
-                user.getPassword(),
-                authorities // Pass the list of authorities
-        );
+                        user.getId(),
+                        user.getFirstname(),
+                        user.getLastname(),
+                        user.getEmail(),
+                        user.getCin(),
+                        user.getPassword(),
+                authorities,
+                user.isForceChangePassword() // Pass the list of authorities
+                );
     }
 
 
