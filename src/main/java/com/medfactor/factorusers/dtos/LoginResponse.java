@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 //@AllArgsConstructor
 @NoArgsConstructor
 public class LoginResponse {
+    private Long id;
     private String email;
     private String cin;
     private String firstName;
@@ -23,7 +24,8 @@ public class LoginResponse {
     private List<String> roles;
     private String token;
     private boolean forceChangePassword;
-    public LoginResponse(String email,String cin,String firstName,String lastName,  Collection<? extends GrantedAuthority> authorities,String token,boolean forceChangePassword){
+    public LoginResponse(Long id,String email,String cin,String firstName,String lastName,  Collection<? extends GrantedAuthority> authorities,String token,boolean forceChangePassword){
+       this.id=id;
         this.email=email;
         this.cin=cin;
         this.firstName=firstName;

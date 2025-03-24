@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService {
         if(userDetails.isForceChangePassword()){
             codeVerficationCreation(loginRequest.getEmail());
         }
-        return new LoginResponse(userDetails.getEmail(),userDetails.getCin(), userDetails.getFirstname(), userDetails.getLastname(), userDetails.getAuthorities(), jwt, userDetails.isForceChangePassword());
+        return new LoginResponse(userDetails.getId(),userDetails.getEmail(),userDetails.getCin(), userDetails.getFirstname(), userDetails.getLastname(), userDetails.getAuthorities(), jwt, userDetails.isForceChangePassword());
     }
 
     @Override

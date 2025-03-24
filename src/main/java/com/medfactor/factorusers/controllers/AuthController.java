@@ -33,6 +33,8 @@ public class AuthController {
         cookie.setHttpOnly(true);
         cookie.setPath("/");
         cookie.setMaxAge(maxAge);
+        cookie.setSecure(true); // Change to false if not using HTTPS
+        cookie.setDomain("localhost");
         response.addCookie(cookie);
         return ResponseEntity.ok(loginResponse);
     }
