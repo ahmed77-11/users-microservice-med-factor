@@ -38,6 +38,34 @@ public class AuthController {
         response.addCookie(cookie);
         return ResponseEntity.ok(loginResponse);
     }
+    @PostMapping("/loginMobile")
+    public ResponseEntity<LoginMobileResponse> loginMobile(@RequestBody LoginRequest loginRequest, HttpServletResponse response) {
+        LoginMobileResponse loginResponse = userService.loginMobile(loginRequest);
+        Cookie cookie = new Cookie("JWT_TOKEN", loginResponse.getToken());
+        cookie.setHttpOnly(true);
+        cookie.setPath("/");
+        cookie.setMaxAge(maxAge);
+        cookie.setSecure(true); // Change to false if not using HTTPS
+        cookie.setDomain("localhost");
+        response.addCookie(cookie);
+        System.out.println("Cookie set with token: " + loginResponse.getToken());
+        return ResponseEntity.ok(loginResponse);
+    }
+
+
+    @PostMapping("/logout")
+    public ResponseEntity<?> logoutUser(HttpServletResponse response) {
+        Cookie cookie = new Cookie("JWT_TOKEN", null); // Clear the cookie
+        cookie.setHttpOnly(true);
+        cookie.setPath("/");
+        cookie.setMaxAge(0); // Set expiration to 0 to delete the cookie
+        cookie.setSecure(true); // or false depending on your setup
+        cookie.setDomain("localhost"); // Same as when you set it
+        response.addCookie(cookie);
+
+        return ResponseEntity.ok("Logged out successfully");
+    }
+
     @PostMapping("/reset-password-email")
     public ResponseEntity<?> resetPassword(@RequestBody Map<String, String> request) {
         String email = request.get("email"); // Extract email from JSON

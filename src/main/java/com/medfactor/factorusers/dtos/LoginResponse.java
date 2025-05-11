@@ -24,7 +24,8 @@ public class LoginResponse {
     private List<String> roles;
     private String token;
     private boolean forceChangePassword;
-    public LoginResponse(Long id,String email,String cin,String firstName,String lastName,  Collection<? extends GrantedAuthority> authorities,String token,boolean forceChangePassword){
+    private String profilePicture;
+    public LoginResponse(Long id,String email,String cin,String firstName,String lastName,  Collection<? extends GrantedAuthority> authorities,String token,boolean forceChangePassword,String profilePicture){
        this.id=id;
         this.email=email;
         this.cin=cin;
@@ -35,6 +36,7 @@ public class LoginResponse {
                 .collect(Collectors.toList());
         this.token=token;
         this.forceChangePassword = forceChangePassword;
+        this.profilePicture=profilePicture;
 
 
     }

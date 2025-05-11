@@ -26,11 +26,14 @@ public class UserDetailsImpl  implements UserDetails {
     private String email;
     private String password;
     private boolean forceChangePassword; // new field
+    private String profilePicture;
+    private Long adherentId;
+    private boolean isAdherent=false;
 
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    private  UserDetailsImpl(Long id, String firstname,String lastname, String email,String cin, String password, Collection<? extends GrantedAuthority> authorities,boolean forceChangePassword) {
+    private  UserDetailsImpl(Long id, String firstname,String lastname, String email,String cin, String password, Collection<? extends GrantedAuthority> authorities,boolean forceChangePassword,String profilePicture,Long adherentId,boolean isAdherent) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -39,6 +42,9 @@ public class UserDetailsImpl  implements UserDetails {
         this.password = password;
         this.authorities = authorities;
         this.forceChangePassword=forceChangePassword;
+        this.profilePicture=profilePicture;
+        this.adherentId=adherentId;
+        this.isAdherent=isAdherent;
 
     }
     public static UserDetailsImpl build(User user) {
@@ -55,7 +61,10 @@ public class UserDetailsImpl  implements UserDetails {
                         user.getCin(),
                         user.getPassword(),
                 authorities,
-                user.isForceChangePassword() // Pass the list of authorities
+                user.isForceChangePassword(), // Pass the list of authorities
+                user.getProfilePicture(),
+                user.getAdherentId(),
+                user.isAdherent()
                 );
     }
 
@@ -75,4 +84,6 @@ public class UserDetailsImpl  implements UserDetails {
     public String getUsername() {
         return email;
     }
+
+
 }

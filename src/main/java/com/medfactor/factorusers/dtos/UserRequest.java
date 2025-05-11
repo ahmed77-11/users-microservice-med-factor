@@ -16,4 +16,10 @@ public class UserRequest {
     private String password;
     private String email;
     private List<String> roles;
+    private String profilePicture;
+    private boolean forceChangePassword;
+    private boolean archiver;
+    private Long adherentId;
+
+
 }

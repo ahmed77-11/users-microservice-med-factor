@@ -1,7 +1,9 @@
 package com.medfactor.factorusers.controllers;
 
 
+import com.medfactor.factorusers.dtos.UserRequest;
 import com.medfactor.factorusers.dtos.UserResponse;
+import com.medfactor.factorusers.entities.Role;
 import com.medfactor.factorusers.entities.User;
 import com.medfactor.factorusers.repos.UserRepository;
 import com.medfactor.factorusers.service.UserDetailsImpl;
@@ -13,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -48,17 +51,71 @@ public class UserController {
     }
 
     @PatchMapping("/updateUser")
-    public User updateUser(@RequestBody User user,Principal principal) throws Exception {
+    public UserRequest updateUser(@RequestBody User user, Principal principal) throws Exception {
         String email = principal.getName();
-        User oldUser=userService.getByEmail(email);
+        User oldUser = userService.getByEmail(email);
 
-        if(  oldUser==null ){
+        if (oldUser == null) {
             throw new Exception("User not found");
         }
+
         user.setPassword(oldUser.getPassword());
-        user.setRoles(oldUser.getRoles());
-        return userService.updateUser(user);
+        user.setRoles(new ArrayList<>(oldUser.getRoles())); // ✅ FIXED shared reference
+        user.setForceChangePassword(oldUser.isForceChangePassword());
+        user.setId(oldUser.getId());
+        User newUser = userService.updateUser(user);
+
+        UserRequest userRequest = new UserRequest();
+        userRequest.setFirstName(newUser.getFirstname());
+        userRequest.setLastName(newUser.getLastname());
+        userRequest.setCin(newUser.getCin());
+        userRequest.setEmail(newUser.getEmail());
+        userRequest.setProfilePicture(newUser.getProfilePicture());
+        userRequest.setArchiver(newUser.getArchiver());
+
+        List<String> roles = new ArrayList<>();
+        for (Role role : newUser.getRoles()) {
+            roles.add(role.getRole());
+        }
+        userRequest.setRoles(roles);
+
+        return userRequest;
     }
+
+    @PatchMapping("/updateMobileUser")
+    public UserRequest updateUserMobile(@RequestBody User user, Principal principal) throws Exception {
+        String email = principal.getName();
+        User oldUser = userService.getByEmail(email);
+
+        if (oldUser == null) {
+            throw new Exception("User not found");
+        }
+
+        user.setPassword(oldUser.getPassword());
+        user.setRoles(new ArrayList<>(oldUser.getRoles())); // ✅ FIXED shared reference
+        user.setForceChangePassword(oldUser.isForceChangePassword());
+        user.setId(oldUser.getId());
+        user.setAdherent(oldUser.isAdherent());
+        user.setAdherentId(oldUser.getAdherentId());
+        User newUser = userService.updateUser(user);
+
+        UserRequest userRequest = new UserRequest();
+        userRequest.setFirstName(newUser.getFirstname());
+        userRequest.setLastName(newUser.getLastname());
+        userRequest.setEmail(newUser.getEmail());
+        userRequest.setAdherentId(newUser.getAdherentId());
+        userRequest.setProfilePicture(newUser.getProfilePicture());
+        userRequest.setArchiver(newUser.getArchiver());
+
+        List<String> roles = new ArrayList<>();
+        for (Role role : newUser.getRoles()) {
+            roles.add(role.getRole());
+        }
+        userRequest.setRoles(roles);
+
+        return userRequest;
+    }
+
 
     @DeleteMapping("/deleteAccount")
     public ResponseEntity<?> deleteUser(Principal principal) throws Exception {
