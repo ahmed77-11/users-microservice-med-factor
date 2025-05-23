@@ -312,6 +312,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getUserMobileByAdherentId(Long id) {
+        return userRepository.findByAdherentIdAndArchiver(id,false).orElseThrow(()->new UsernameNotFoundException("User Not Found with id: "+id));
+    }
+
+    @Override
     public String randomCodeGenerator(int i,boolean type) {
        final String CHARACTERS=type?"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789":"0123456789";
        final SecureRandom RANDOM=new SecureRandom();

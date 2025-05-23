@@ -49,6 +49,21 @@ public class UserController {
         userResponse.setCin(user.getCin());
         return userResponse;
     }
+    @GetMapping("/getUserMobile/{id}")
+    public UserResponse getUserByIdMobile(@PathVariable("id") Long id) {
+        System.out.println(new Date());
+        System.out.println(id);
+        if (id == null)
+            return null;
+        User user=userService.getUserMobileByAdherentId(id);
+        UserResponse userResponse=new UserResponse();
+        userResponse.setId(user.getId());
+        userResponse.setEmail(user.getEmail());
+        userResponse.setRoles(user.getRoles());
+        userResponse.setFirstName(user.getFirstname());
+        userResponse.setLastName(user.getLastname());
+        return userResponse;
+    }
 
     @PatchMapping("/updateUser")
     public UserRequest updateUser(@RequestBody User user, Principal principal) throws Exception {

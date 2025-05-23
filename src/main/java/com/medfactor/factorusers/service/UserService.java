@@ -34,6 +34,7 @@ public interface UserService {
     UserResponse updateUserRoles(List<String> roles, Long id);
 
     User getUserById(Long id);
+    User getUserMobileByAdherentId(Long id);
     String randomCodeGenerator(int i,boolean type);
     User updateUser(User user);
     User updateUserById(UserRequest userRequest, Long id);

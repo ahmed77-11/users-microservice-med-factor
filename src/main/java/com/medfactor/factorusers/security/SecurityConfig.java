@@ -81,7 +81,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
 
 
-                .cors(cors->{
+                  .cors(cors->{
                     cors.configurationSource(request->{
                         var corsConfiguration=new org.springframework.web.cors.CorsConfiguration();
                         corsConfiguration.setAllowedOrigins(Arrays.asList(

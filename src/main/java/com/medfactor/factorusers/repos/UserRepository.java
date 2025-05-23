@@ -13,5 +13,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findAllByArchiver(boolean archiver);
 
     Optional<User> findByCin(String username);
+    Optional<User> findByAdherentIdAndArchiver(Long id, boolean archiver);
     List<User> findUsersByRolesContaining(Role role);
 }
