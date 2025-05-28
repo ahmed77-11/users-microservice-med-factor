@@ -23,6 +23,7 @@ public interface UserService {
     void sendEmailUser(User u,String password);
 
     void codeVerficationCreation(String email);
+    void sendActionVerifyCodeEmail(String email,String action);
     Boolean verifyCode(String email,String code);
 
     void changePassword(ResetRequest resetRequest);

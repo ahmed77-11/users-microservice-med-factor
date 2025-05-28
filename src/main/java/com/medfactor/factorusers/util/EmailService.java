@@ -67,4 +67,29 @@ public class EmailService implements EmailSender {
             throw new IllegalStateException("Failed to send email: " + e.getMessage(), e);
         }
     }
+
+    @Override
+    public void sendActionEmail(String to, String email, String action, String code) {
+        try {
+         MimeMessage message=mailSender.createMimeMessage();
+         MimeMessageHelper helper=new MimeMessageHelper(message,true,"utf-8");
+         Context context=new Context();
+            context.setVariable("email",email);
+            context.setVariable("action", action);
+            context.setVariable("code", code);
+            context.setVariable("logoImage", "cid:logoImage");
+            String emailContent=templateEngine.process("actionTemplate",context);
+            helper.setTo(to);
+            helper.setSubject("Action Requise Pour Votre Compte MedFactor");
+            helper.setFrom("mghirbiahmed02@gmail.com");
+            helper.setText(emailContent,true);
+            ClassPathResource image = new ClassPathResource("static/logoMF.jpg");
+            helper.addInline("logoImage", image);
+
+            mailSender.send(message);
+
+        }catch (MessagingException e) {
+            throw new IllegalStateException("Failed to send email: " + e.getMessage(), e);
+        }
+    }
 }

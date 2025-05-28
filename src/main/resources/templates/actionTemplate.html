@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Action sécurisée – Med Factor</title>
+</head>
+<body style="margin:0; padding:0; background-color:#f4f4f4; font-family:Arial, sans-serif;">
+
+<table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0"
+       style="background-color:#f4f4f4; padding:20px;">
+    <tr>
+        <td align="center">
+            <table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0"
+                   style="background:#ffffff; padding:30px; border-radius:10px;
+                    box-shadow:0 0 10px rgba(0,0,0,0.1);">
+
+                <!-- Logo -->
+                <tr>
+                    <td align="center" style="padding-bottom:20px;">
+                        <img th:src="'cid:logoImage'" alt="Med Factor Logo" width="100" style="display:block;">
+                    </td>
+                </tr>
+
+                <!-- Title -->
+                <tr>
+                    <td align="center"
+                        style="font-size:24px; font-weight:bold; color:#2c3e50; padding-bottom:10px;"
+                        th:switch="${action}">
+
+                        <span th:case="'edit'">Confirmation de modification</span>
+                        <span th:case="'delete'">Confirmation de suppression</span>
+                        <span th:case="*">Action sécurisée</span>
+                    </td>
+                </tr>
+
+                <!-- Intro copy -->
+                <tr>
+                    <td align="center" style="font-size:16px; color:#333; padding-bottom:20px;"
+                        th:switch="${action}">
+
+                        <p th:case="'edit'">
+                            Vous avez demandé à <strong>modifier</strong> cet élément.
+                        </p>
+                        <p th:case="'delete'">
+                            Vous avez demandé à <strong>supprimer</strong> cet élément.
+                        </p>
+                        <p th:case="*">
+                            Pour confirmer votre action, veuillez saisir le code ci‑dessous :
+                        </p>
+                    </td>
+                </tr>
+
+                <!-- Code box -->
+                <tr>
+                    <td align="center"
+                        style="background:#ecf0f1; padding:20px; border-radius:5px;
+                     font-size:16px; color:#333;">
+                        <p>
+                            <strong>Email :</strong>
+                            <a th:href="'mailto:' + ${email}" th:text="${email}"
+                               style="color:#2980b9; text-decoration:none; font-weight:bold;">
+                                email@medfactor.com
+                            </a>
+                        </p>
+                        <p>
+                            <strong>Votre code de sécurité :</strong>
+                            <span th:text="${code}"
+                                  style="font-weight:bold; color:#e74c3c; font-size:18px;">
+                123456
+              </span>
+                        </p>
+                    </td>
+                </tr>
+
+                <!-- Footer -->
+                <tr>
+                    <td align="center" style="font-size:14px; color:#777; padding-top:20px;">
+                        <p>Si vous n’avez pas initié cette action, veuillez contacter notre support immédiatement.</p>
+                        <p>&copy; 2025 Med Factor. Tous droits réservés.</p>
+                    </td>
+                </tr>
+
+            </table>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

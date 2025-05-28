@@ -201,6 +201,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
+    public void sendActionVerifyCodeEmail(String email, String action) {
+        User user=this.getByEmail(email);
+        verificationTokenRepository.deleteAllByUser(user);
+        String code = this.randomCodeGenerator(6, false);
+        VerficationToken verficationToken = new VerficationToken(code, user);
+        verificationTokenRepository.save(verficationToken);
+        emailSender.sendActionEmail(user.getEmail(),user.getEmail(), action, code);
+    }
+
+    @Override
     public Boolean verifyCode(String email, String code) {
         VerficationToken verficationToken = verificationTokenRepository.findByToken(code).orElseThrow(() -> new UsernameNotFoundException("Token Not Found"));
         User user = verficationToken.getUser();
