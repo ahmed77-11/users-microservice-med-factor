@@ -42,4 +42,6 @@ public interface UserService {
     void deleteUser(Long id);
 
     List<UserResponse> getAllUsers();
+
+    Long getUserCount();
 }

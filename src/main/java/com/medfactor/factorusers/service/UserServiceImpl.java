@@ -384,4 +384,9 @@ public class UserServiceImpl implements UserService {
         }).forEach(userResponses::add);
         return userResponses;
     }
+
+    @Override
+    public Long getUserCount() {
+        return userRepository.countAllByArchiver(false);
+    }
 }

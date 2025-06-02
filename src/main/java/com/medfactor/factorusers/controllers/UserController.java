@@ -148,6 +148,11 @@ public class UserController {
     public List<UserResponse> getAllUserByRole(@PathVariable("role") String role){
         return userService.getAllUserByRole(role);
     }
+    @GetMapping("/dashboard/count-users")
+    public ResponseEntity<Long> getUserCount() {
+        Long count = userService.getUserCount();
+        return ResponseEntity.ok(count);
+    }
 
 
 
