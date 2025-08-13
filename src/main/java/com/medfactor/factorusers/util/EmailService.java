@@ -33,7 +33,7 @@ public class EmailService implements EmailSender {
             helper.setSubject("Votre Compte est creer dans MedFactor");
             helper.setFrom("mghirbiahmed02@gmail.com");
             helper.setText(emailContent,true);
-            ClassPathResource image = new ClassPathResource("static/logoMF.jpg");
+            ClassPathResource image = new ClassPathResource("static/logoMf.jpg");
             helper.addInline("logoImage", image);
 
             mailSender.send(message);
@@ -59,7 +59,7 @@ public class EmailService implements EmailSender {
             helper.setSubject("Votre Code de Verfication Pour change Le Mot de passe en MedFactor");
             helper.setFrom("mghirbiahmed02@gmail.com");
             helper.setText(emailContent,true);
-            ClassPathResource image = new ClassPathResource("static/logoMF.jpg");
+            ClassPathResource image = new ClassPathResource("static/logoMf.jpg");
             helper.addInline("logoImage", image);
 
             mailSender.send(message);
@@ -83,7 +83,7 @@ public class EmailService implements EmailSender {
             helper.setSubject("Action Requise Pour Votre Compte MedFactor");
             helper.setFrom("mghirbiahmed02@gmail.com");
             helper.setText(emailContent,true);
-            ClassPathResource image = new ClassPathResource("static/logoMF.jpg");
+            ClassPathResource image = new ClassPathResource("static/logoMf.jpg");
             helper.addInline("logoImage", image);
 
             mailSender.send(message);

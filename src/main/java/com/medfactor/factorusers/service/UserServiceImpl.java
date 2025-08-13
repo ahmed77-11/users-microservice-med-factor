@@ -124,6 +124,7 @@ public class UserServiceImpl implements UserService {
     }
     private Map<String, Object> getDataFromContrat(Long adherentId,String jwt) {
         String url="http://localhost:8083/factoring/contrat/api/find-by-adherent/"+adherentId;
+//        String url="http://contract:8083/factoring/contrat/api/find-by-adherent/"+adherentId;
         HttpHeaders headers=new HttpHeaders();
         headers.add("Cookie", "JWT_TOKEN=" +jwt);
         HttpEntity<String> entity=new HttpEntity<>(headers);

@@ -12,13 +12,16 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableWebMvc
 public class WebConfig  implements WebMvcConfigurer{
 
-
+    @Value("${file.upload-dir}")
+    private String uploadDir;
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
+
+
         // Map the /uploads/** URL to the actual file system location
         registry.addResourceHandler("/uploads/**")
-                .addResourceLocations("file:C:/Users/mghir/Documents/PFE/factor-users/src/main/resources/static/uploads/");
+                .addResourceLocations("file:"+uploadDir + "/");
     }
 
 
