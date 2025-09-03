@@ -16,7 +16,7 @@ import org.thymeleaf.context.Context;
 public class EmailService implements EmailSender {
     private final JavaMailSender mailSender;
 
-    @Autowired
+    @Autowired  
     private TemplateEngine templateEngine;
     @Override
     public void sendEmail(String to, String email,String password){
